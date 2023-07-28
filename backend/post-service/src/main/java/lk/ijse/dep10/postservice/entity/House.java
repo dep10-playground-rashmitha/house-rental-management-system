@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -20,6 +17,7 @@ import java.math.BigDecimal;
 @Table(name = "house")
 public class House implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private String address;
@@ -35,4 +33,14 @@ public class House implements Serializable {
     private BigDecimal area;
     @Column(nullable = false)
     private BigDecimal price;
+
+    public House(String address, String location, Integer noOfRooms, Integer noOfBathrooms, Integer noOfFloors, BigDecimal area, BigDecimal price) {
+        this.address = address;
+        this.location = location;
+        this.noOfRooms = noOfRooms;
+        this.noOfBathrooms = noOfBathrooms;
+        this.noOfFloors = noOfFloors;
+        this.area = area;
+        this.price = price;
+    }
 }

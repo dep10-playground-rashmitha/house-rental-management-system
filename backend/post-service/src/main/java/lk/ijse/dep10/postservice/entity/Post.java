@@ -17,6 +17,7 @@ import java.sql.Date;
 @Table(name = "post")
 public class Post implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private String title;
@@ -29,4 +30,12 @@ public class Post implements Serializable{
     @OneToOne
     @JoinColumn(name = "house_id", nullable = false, referencedColumnName = "id" , unique = true)
     private House house;
+
+    public Post(String title, String description, String userName, Date date, House house) {
+        this.title = title;
+        this.description = description;
+        this.userName = userName;
+        this.date = date;
+        this.house = house;
+    }
 }
