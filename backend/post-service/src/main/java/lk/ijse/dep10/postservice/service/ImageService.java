@@ -13,6 +13,4 @@ public interface ImageService {
     void deleteImage(byte[] image);
 
     ImageDTO getImage(byte[] image);
-
-    List<ImageDTO> findImages(String query);
 }
