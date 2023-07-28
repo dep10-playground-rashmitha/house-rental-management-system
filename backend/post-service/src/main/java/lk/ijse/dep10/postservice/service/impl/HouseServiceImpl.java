@@ -21,9 +21,12 @@ public class HouseServiceImpl implements HouseService {
 
     private final ModelMapper mapper;
 
-    public HouseServiceImpl(HouseRepository houseRepository, ModelMapper modelMapper) {
+    private final ImageServiceImpl imageService;
+
+    public HouseServiceImpl(HouseRepository houseRepository, ModelMapper modelMapper, ImageServiceImpl imageService) {
         this.houseRepository = houseRepository;
         this.mapper = modelMapper;
+        this.imageService = imageService;
     }
 
 
@@ -43,7 +46,7 @@ public class HouseServiceImpl implements HouseService {
     public void deleteHouse(Integer id) {
         if(houseRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The house id: " + id + " does not exists");
-        /* Todo: Check whether images has been deleted */
+        imageService.deleteImageByHouseId(id);
         houseRepository.deleteById(id);
     }
 

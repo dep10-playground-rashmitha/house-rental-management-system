@@ -53,4 +53,9 @@ public class ImageServiceImpl implements ImageService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The image does not exists"));
     }
 
+    @Override
+    public void deleteImageByHouseId(Integer houseId) {
+        imageRepository.deleteByHouse_Id(houseId);
+    }
+
 }

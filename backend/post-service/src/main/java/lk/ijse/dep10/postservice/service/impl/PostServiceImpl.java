@@ -21,9 +21,12 @@ public class PostServiceImpl implements PostService {
 
     private final ModelMapper modelMapper;
 
-    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
+    private final HouseServiceImpl houseService;
+
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, HouseServiceImpl houseService) {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
+        this.houseService = houseService;
     }
 
     @Override
@@ -42,7 +45,8 @@ public class PostServiceImpl implements PostService {
     public void deletePost(Integer id) {
         if(postRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The    post id: " + id + " does not exists");
-        /* Todo: Check whether house has been deleted */
+        PostDTO post = getPost(id);
+        houseService.deleteHouse(post.getHouse().getId());
         postRepository.deleteById(id);
     }
 

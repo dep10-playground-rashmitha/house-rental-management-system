@@ -13,4 +13,6 @@ public interface ImageService {
     void deleteImage(byte[] image);
 
     ImageDTO getImage(byte[] image);
+
+    void deleteImageByHouseId(Integer houseId);
 }
