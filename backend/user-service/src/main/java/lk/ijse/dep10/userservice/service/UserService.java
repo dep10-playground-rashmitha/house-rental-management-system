@@ -5,6 +5,6 @@ public interface UserService {
     void saveUser(UserDTO user);
     void updateUser(UserDTO user);
     void deleteUser(String userName);
-    UserDTO getUser(String userName,String password);
+    String getUser(String userName,String password);
 
 }

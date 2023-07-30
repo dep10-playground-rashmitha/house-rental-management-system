@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="user")
+@Table(name="_user")
 public class User implements Serializable {
     @Column(name = "first_name",nullable = false)
     private String firstName;
@@ -26,6 +26,8 @@ public class User implements Serializable {
     private String Address;
     @Column(name = "tel_no",nullable = false)
     private String telNo;
+    @Column(name = "email",nullable = false)
+    private String email;
     @Id
     @Column(name = "user_name")
     private String userName;

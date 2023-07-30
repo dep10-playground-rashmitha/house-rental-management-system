@@ -25,12 +25,12 @@ public class UserDTO {
     @NotBlank(message = "Tel Number can not be empty.")
     @Pattern(regexp = "^\\d{3}-\\d{7}$",message = "Invalid Telephone Number.")
     private String telNo;
+    @NotBlank(message = "Email can not be empty.")
+    private String email;
     @NotBlank(message = "User Name can not be empty.")
     @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{4,19}$",message = "Invalid User Name.")
     private String userName;
     @NotBlank(message = "Password can not be empty.")
-    @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9])(?=.{8,})",message = "Password should include more than 8" +
-            "characters and should include Uppercase,Lowercase,Digit and one character.")
     private String password;
 
 }
