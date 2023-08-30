@@ -10,9 +10,9 @@ public interface ImageService {
 
     void updateImage(ImageDTO image);
 
-    void deleteImage(byte[] image);
+    void deleteImage(String image);
 
-    ImageDTO getImage(byte[] image);
+    ImageDTO getImage(String image);
 
-    void deleteImageByHouseId(Integer houseId);
+    void deleteImageByPostId(Integer houseId);
 }

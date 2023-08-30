@@ -19,14 +19,15 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
+    private final ImageServiceImpl imageService;
+
     private final ModelMapper modelMapper;
 
-    private final HouseServiceImpl houseService;
 
-    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, HouseServiceImpl houseService) {
+    public PostServiceImpl(PostRepository postRepository, ImageServiceImpl imageService, ModelMapper modelMapper) {
         this.postRepository = postRepository;
+        this.imageService = imageService;
         this.modelMapper = modelMapper;
-        this.houseService = houseService;
     }
 
     @Override
@@ -43,10 +44,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePost(Integer id) {
-        if(postRepository.existsById(id))
+        if(!postRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The    post id: " + id + " does not exists");
-        PostDTO post = getPost(id);
-        houseService.deleteHouse(post.getHouse().getId());
+        imageService.deleteImageByPostId(id);
         postRepository.deleteById(id);
     }
 
@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostDTO> findPosts(String query) {
         query = "%" + query + "%";
-        return postRepository.findPostsByTitleLikeOrDescriptionLikeOrUserNameLike(query,query,query)
+        return postRepository.findPostsByTitleLikeOrDescriptionLikeOrUserNameLikeOrAddressLikeOrLocationLike(query,query,query,query,query)
                 .stream().map(post -> modelMapper.map(post, PostDTO.class)).collect(Collectors.toList());
     }
 }

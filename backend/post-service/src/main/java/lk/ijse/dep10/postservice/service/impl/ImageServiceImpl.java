@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @Service
 @Transactional
 public class ImageServiceImpl implements ImageService {
@@ -27,35 +25,36 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public void saveImage(ImageDTO image) {
-        if(imageRepository.existsById(image.getImage()))
+        if (imageRepository.existsById(image.getImg()))
             throw new ResponseStatusException(HttpStatus.CONFLICT, "This image already exists in the system");
         imageRepository.save(mapper.map(image, Image.class));
     }
 
     @Override
     public void updateImage(ImageDTO image) {
-        if(imageRepository.existsById(image.getImage()))
+    if (imageRepository.existsById(image.getImg() ))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This image already exists in the system");
         imageRepository.save(mapper.map(image, Image.class));
     }
 
     @Override
-    public void deleteImage(byte[] image) {
-        if(imageRepository.existsById(image))
+    public void deleteImage(String image) {
+        if (imageRepository.existsById(image))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This image does not exists");
         imageRepository.deleteById(image);
     }
 
     @Override
-    public ImageDTO getImage(byte[] image) {
+    public ImageDTO getImage(String image) {
         return imageRepository.findById(image)
                 .map(img -> mapper.map(img, ImageDTO.class))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The image does not exists"));
     }
 
     @Override
-    public void deleteImageByHouseId(Integer houseId) {
-        imageRepository.deleteByHouse_Id(houseId);
+    public void deleteImageByPostId(Integer houseId) {
+        imageRepository.deleteByPostId(houseId);
     }
+
 
 }

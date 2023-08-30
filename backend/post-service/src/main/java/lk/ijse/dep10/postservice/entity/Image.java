@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Blob;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,10 +18,10 @@ import java.io.Serializable;
 @Table(name = "image")
 public class Image implements Serializable {
     @Id
-    private byte[] image;
+    private String img;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "image_house",
-                joinColumns = @JoinColumn(name = "image", referencedColumnName = "image"),
-                inverseJoinColumns = @JoinColumn(name = "house_id", referencedColumnName = "id",nullable = false))
-    private House house;
+    @JoinTable(name = "image_post",
+                joinColumns = @JoinColumn(name = "img", referencedColumnName = "img"),
+                inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id",nullable = false))
+    private Post post;
 }

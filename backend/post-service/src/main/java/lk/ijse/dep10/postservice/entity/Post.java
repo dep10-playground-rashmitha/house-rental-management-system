@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Data
@@ -27,15 +28,32 @@ public class Post implements Serializable{
     private String userName;
     @Column(nullable = false)
     private Date date;
-    @OneToOne
-    @JoinColumn(name = "house_id", nullable = false, referencedColumnName = "id" , unique = true)
-    private House house;
+    @Column(nullable = false)
+    private String address;
+    @Column(nullable = false)
+    private String location;
+    @Column(nullable = false, name = "no_of_rooms")
+    private Integer noOfRooms;
+    @Column(nullable = false, name = "no_of_bathrooms")
+    private Integer noOfBathrooms;
+    @Column(nullable = false, name = "no_of_floors")
+    private Integer noOfFloors;
+    @Column(nullable = false)
+    private BigDecimal area;
+    @Column(nullable = false)
+    private BigDecimal price;
 
-    public Post(String title, String description, String userName, Date date, House house) {
+    public Post(String title, String description, String userName, Date date, String address, String location, Integer noOfRooms, Integer noOfBathrooms, Integer noOfFloors, BigDecimal area, BigDecimal price) {
         this.title = title;
         this.description = description;
         this.userName = userName;
         this.date = date;
-        this.house = house;
+        this.address = address;
+        this.location = location;
+        this.noOfRooms = noOfRooms;
+        this.noOfBathrooms = noOfBathrooms;
+        this.noOfFloors = noOfFloors;
+        this.area = area;
+        this.price = price;
     }
 }
