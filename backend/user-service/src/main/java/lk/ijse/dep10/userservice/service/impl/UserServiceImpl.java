@@ -5,6 +5,7 @@ import lk.ijse.dep10.userservice.entity.User;
 import lk.ijse.dep10.userservice.repository.UserRepository;
 import lk.ijse.dep10.userservice.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
